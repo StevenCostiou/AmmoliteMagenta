@@ -1,6 +1,6 @@
-Extension { #name : #Stack }
+Extension { #name : 'Stack' }
 
-{ #category : #'*AmmoliteMagenta' }
+{ #category : '*AmmoliteMagenta' }
 Stack >> fillGroups: groups startingAt: aGroup [
 
 	| currentGroup |

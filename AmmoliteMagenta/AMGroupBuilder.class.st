@@ -2,12 +2,14 @@
 I randomly build groups of students, given a number of groups and a list of students.
 "
 Class {
-	#name : #AMGroupBuilder,
-	#superclass : #Object,
-	#category : #'AmmoliteMagenta-model'
+	#name : 'AMGroupBuilder',
+	#superclass : 'Object',
+	#category : 'AmmoliteMagenta-model',
+	#package : 'AmmoliteMagenta',
+	#tag : 'model'
 }
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 AMGroupBuilder >> buildGroups: n forStudents: studentList [
 
 	| groups students pStack lStack nStack currentGroup |
@@ -27,20 +29,20 @@ AMGroupBuilder >> buildGroups: n forStudents: studentList [
 	^ groups collect:[:g| g value]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AMGroupBuilder >> lStackFrom: students [
 
 	^ self stackFrom: (students select: [ :s | s markerL ])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AMGroupBuilder >> nStackFrom: students [
 
 	^ self stackFrom:
 		  (students reject: [ :s | s markerP or: [ s markerL ] ])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AMGroupBuilder >> newGroups: n [
 
 	| groups |
@@ -55,13 +57,13 @@ AMGroupBuilder >> newGroups: n [
 	^ groups
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AMGroupBuilder >> pStackFrom: students [
 
 	^ self stackFrom: (students select: [ :s | s markerP ])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AMGroupBuilder >> stackFrom: students [
 
 	| stack |

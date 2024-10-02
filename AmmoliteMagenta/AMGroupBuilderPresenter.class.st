@@ -3,8 +3,8 @@ I am the Ammolite Magenta application.
 I allow for creating and shuffling groups of students.
 "
 Class {
-	#name : #AMGroupBuilderPresenter,
-	#superclass : #StPresenter,
+	#name : 'AMGroupBuilderPresenter',
+	#superclass : 'StPresenter',
 	#instVars : [
 		'data',
 		'classes',
@@ -17,10 +17,12 @@ Class {
 	#classInstVars : [
 		'outputFontSize'
 	],
-	#category : #'AmmoliteMagenta-presenters'
+	#category : 'AmmoliteMagenta-presenters',
+	#package : 'AmmoliteMagenta',
+	#tag : 'presenters'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 AMGroupBuilderPresenter class >> application [
 
 	^ SpApplication new
@@ -28,7 +30,7 @@ AMGroupBuilderPresenter class >> application [
 		  yourself
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 AMGroupBuilderPresenter class >> configurationLayout [
 
 	^ SpBoxLayout newLeftToRight
@@ -37,8 +39,8 @@ AMGroupBuilderPresenter class >> configurationLayout [
 		  yourself
 ]
 
-{ #category : #specs }
-AMGroupBuilderPresenter class >> defaultSpec [
+{ #category : 'specs' }
+AMGroupBuilderPresenter class >> defaultLayout [
 
 	^ SpPanedLayout newTopToBottom
 		positionOfSlider: 30 percent;
@@ -47,29 +49,29 @@ AMGroupBuilderPresenter class >> defaultSpec [
 		yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 AMGroupBuilderPresenter class >> example [
 
 	<script>
 	self openOn: AMPromotion readFromDisk
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 AMGroupBuilderPresenter class >> openOn: data [
 
 	self basicNew
 		data: data;
 		application: self application;
 		initialize;
-		openWithSpec
+		open
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMGroupBuilderPresenter class >> outputFontSize [
 	^outputFontSize ifNil:[outputFontSize := 18]
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 AMGroupBuilderPresenter class >> outputLayout [
 
 	^ SpBoxLayout newTopToBottom
@@ -103,7 +105,7 @@ AMGroupBuilderPresenter class >> outputLayout [
 		  yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 AMGroupBuilderPresenter class >> styleSheet [
 
 	^ SpStyleVariableSTONReader fromString: '
@@ -170,12 +172,12 @@ AMGroupBuilderPresenter class >> styleSheet [
 '
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMGroupBuilderPresenter class >> updateOutputFontSize: anInteger [
 	outputFontSize := anInteger
 ]
 
-{ #category : #displaying }
+{ #category : 'displaying' }
 AMGroupBuilderPresenter >> addGroupDecorationTo: presenter for: text [
 
 	| size |
@@ -187,24 +189,29 @@ AMGroupBuilderPresenter >> addGroupDecorationTo: presenter for: text [
 			 yourself)
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 AMGroupBuilderPresenter >> clearGroups [
 	self flag: 'todo'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMGroupBuilderPresenter >> data [
 
 	^ data ifNil: [ data := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMGroupBuilderPresenter >> data: anObject [
 
 	data := anObject
 ]
 
-{ #category : #displaying }
+{ #category : 'layout' }
+AMGroupBuilderPresenter >> defaultLayout [
+	^self class defaultLayout
+]
+
+{ #category : 'displaying' }
 AMGroupBuilderPresenter >> displayGroups: groups [
 
 	| grid str i j lay |
@@ -230,7 +237,7 @@ AMGroupBuilderPresenter >> displayGroups: groups [
 			i := 1 ] ].
 
 	1 to: j do: [ :n | grid row: n withConstraints: [ :c | c beExpand ] ].
-	lay := self class defaultSpec.
+	lay := self class defaultLayout.
 	lay children second
 		add: grid
 		expand: true
@@ -242,12 +249,12 @@ AMGroupBuilderPresenter >> displayGroups: groups [
 		self addGroupDecorationTo: textPresenter for: textPresenter text ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 AMGroupBuilderPresenter >> exit [
 	self withWindowDo: [ :w| w close ]
 ]
 
-{ #category : #export }
+{ #category : 'export' }
 AMGroupBuilderPresenter >> exportGroups: groups [
 
 	AMLocalRepository new
@@ -255,7 +262,7 @@ AMGroupBuilderPresenter >> exportGroups: groups [
 		fromClass: classes selectedItem name
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 AMGroupBuilderPresenter >> generate [
 
 	| nbGroups studentsSelection groups |
@@ -270,7 +277,7 @@ AMGroupBuilderPresenter >> generate [
 	self displayGroups: groups
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AMGroupBuilderPresenter >> initializePresenters [
 
 	super initializePresenters.
@@ -325,7 +332,7 @@ AMGroupBuilderPresenter >> initializePresenters [
 	classes items: self data
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AMGroupBuilderPresenter >> initializeToolbar [
 
 	controls addItem: (SpToolbarButtonPresenter new
@@ -361,7 +368,7 @@ AMGroupBuilderPresenter >> initializeToolbar [
 			 yourself)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AMGroupBuilderPresenter >> initializeWindow: aWindowPresenter [
 
 	super initializeWindow: aWindowPresenter.
@@ -371,7 +378,7 @@ AMGroupBuilderPresenter >> initializeWindow: aWindowPresenter [
 	"aWindowPresenter withoutDecorations"
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AMGroupBuilderPresenter >> isPromotionSelected [
 
 	| promotion |
@@ -382,7 +389,7 @@ AMGroupBuilderPresenter >> isPromotionSelected [
 	^ true
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 AMGroupBuilderPresenter >> load [
 
 	| repository savedGroups index |
@@ -397,7 +404,7 @@ AMGroupBuilderPresenter >> load [
 		(repository reloadGroupsFrom: (savedGroups at: index) asFileReference)
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 AMGroupBuilderPresenter >> pickRandomStudent [
 
 	self isPromotionSelected ifFalse: [ ^ self ].
@@ -405,7 +412,7 @@ AMGroupBuilderPresenter >> pickRandomStudent [
 
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 AMGroupBuilderPresenter >> popStudent: aString relativeTo: aPresenter [
 
 	self newPopover
@@ -423,7 +430,7 @@ AMGroupBuilderPresenter >> popStudent: aString relativeTo: aPresenter [
 		popup
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 AMGroupBuilderPresenter >> reload [
 	classes items: AMPromotion readFromDisk.
 	classes unselectAll.
@@ -431,7 +438,7 @@ AMGroupBuilderPresenter >> reload [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AMGroupBuilderPresenter >> studentMenu [
 
 	^ self newMenu addGroup: [ :aGroup | 
@@ -441,7 +448,7 @@ AMGroupBuilderPresenter >> studentMenu [
 				  action: [ students selectedItem inspect ] ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AMGroupBuilderPresenter >> updateOutputFontSize [
 
 	(((self application propertyAt: 'styleSheet') styles
@@ -452,13 +459,13 @@ AMGroupBuilderPresenter >> updateOutputFontSize [
 	self update
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 AMGroupBuilderPresenter >> updateStudents: class [
 
 	students items: class students
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 AMGroupBuilderPresenter >> warning: aString relativeTo: aPresenter [ 
 	self newPopover
 		addStyle: 'error';

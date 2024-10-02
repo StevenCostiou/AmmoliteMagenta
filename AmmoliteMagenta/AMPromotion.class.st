@@ -4,16 +4,18 @@ I represent a promotion of students:
 - I have a list of students
 "
 Class {
-	#name : #AMPromotion,
-	#superclass : #Object,
+	#name : 'AMPromotion',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'students'
 	],
-	#category : #'AmmoliteMagenta-model'
+	#category : 'AmmoliteMagenta-model',
+	#package : 'AmmoliteMagenta',
+	#tag : 'model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 AMPromotion class >> readFromAssociation: association [
 
 	| promotion |
@@ -24,42 +26,42 @@ AMPromotion class >> readFromAssociation: association [
 	^ promotion
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 AMPromotion class >> readFromDisk [
 
 	^ AMLocalRepository readAllPromotions collect: [ :association | 
 		  self readFromAssociation: association ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMPromotion >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMPromotion >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 AMPromotion >> pickRandomStudent [
 	^self students atRandom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMPromotion >> size [
 	^self students size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMPromotion >> students [
 
 	^ students ifNil: [ students := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMPromotion >> students: anObject [
 
 	students := anObject

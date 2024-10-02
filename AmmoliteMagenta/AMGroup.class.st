@@ -2,40 +2,42 @@
 I represent a group of students sorted by name.
 "
 Class {
-	#name : #AMGroup,
-	#superclass : #Object,
+	#name : 'AMGroup',
+	#superclass : 'Object',
 	#instVars : [
 		'id',
 		'name',
 		'students'
 	],
-	#category : #'AmmoliteMagenta-model'
+	#category : 'AmmoliteMagenta-model',
+	#package : 'AmmoliteMagenta',
+	#tag : 'model'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 AMGroup >> addStudent: anAMStudent [
 	self students add: anAMStudent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMGroup >> id [
 
 	^ id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AMGroup >> id: anInteger [ 
 	id := anInteger
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 AMGroup >> students [
 
 	^ students ifNil: [ 
 		  students := SortedCollection sortBlock: [ :a :b | a name < b name ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 AMGroup >> textPrintOn: stream [
 
 	stream << ('[ ' , id printString , ' ]') asText allBold.
@@ -46,7 +48,7 @@ AMGroup >> textPrintOn: stream [
 		s = students last ifFalse: [ stream cr ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 AMGroup >> textPrintStudent: student on: stream [
 	
 	student textPrintOn: stream.

@@ -4,12 +4,14 @@ These resources must be text files with an item per line,
 each line separated by a carriage return.
 "
 Class {
-	#name : #AMLocalRepository,
-	#superclass : #Object,
-	#category : #'AmmoliteMagenta-model'
+	#name : 'AMLocalRepository',
+	#superclass : 'Object',
+	#category : 'AmmoliteMagenta-model',
+	#package : 'AmmoliteMagenta',
+	#tag : 'model'
 }
 
-{ #category : #api }
+{ #category : 'api' }
 AMLocalRepository class >> readAllPromotions [
 
 	| repository |
@@ -20,13 +22,13 @@ AMLocalRepository class >> readAllPromotions [
 		  -> (repository readFileReference: f) ]
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 AMLocalRepository >> allFileReferences [
 
 	^ self localDirectory children
 ]
 
-{ #category : #origins }
+{ #category : 'origins' }
 AMLocalRepository >> groupsDirectory [
 	|dir|
 	dir := self localDirectory / 'groups'.
@@ -34,7 +36,7 @@ AMLocalRepository >> groupsDirectory [
 	^dir
 ]
 
-{ #category : #origins }
+{ #category : 'origins' }
 AMLocalRepository >> localDirectory [ 
 	|dir|
 	dir := FileSystem workingDirectory / 'repository'.
@@ -42,7 +44,7 @@ AMLocalRepository >> localDirectory [
 	^dir
 ]
 
-{ #category : #origins }
+{ #category : 'origins' }
 AMLocalRepository >> newGeneratedGroupFileNameFor: aClass [
 	
 	| str dateTime |
@@ -57,19 +59,19 @@ AMLocalRepository >> newGeneratedGroupFileNameFor: aClass [
 	^ str contents
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 AMLocalRepository >> readFileReference: aFileReference [
 
 	^ aFileReference binaryReadStream contents asString splitOn:
 		  OSPlatform current lineEnding
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AMLocalRepository >> reloadGroupsFrom: aFilename [
 	^STON fromString: aFilename readStream contents
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AMLocalRepository >> saveGroups: groups fromClass: aClass [
 
 	| filename |
@@ -80,7 +82,7 @@ AMLocalRepository >> saveGroups: groups fromClass: aClass [
 		close
 ]
 
-{ #category : #origins }
+{ #category : 'origins' }
 AMLocalRepository >> savedGroups [
 
 	^ self groupsDirectory entries

@@ -1,1 +1,1 @@
-Package { #name : #AmmoliteMagenta }
+Package { #name : 'AmmoliteMagenta' }

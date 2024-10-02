@@ -451,7 +451,7 @@ AMGroupBuilderPresenter >> studentMenu [
 { #category : 'initialization' }
 AMGroupBuilderPresenter >> updateOutputFontSize [
 
-	(((self application propertyAt: 'styleSheet') styles
+	(((self application styleSheet) styles
 		  detect: [ :s | (s respondsTo: #name) and: [ s name = 'text' ] ]
 		  ifNone: [ ^ self ]) styles
 		 detect: [ :s | s isKindOf: SpFontStyle ]
